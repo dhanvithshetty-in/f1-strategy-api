@@ -11,12 +11,10 @@ app = FastAPI(
     description="Production-grade inference engine for F1 tire degradation loops.",
 )
 
+# FIXED: Global CORS rules applied to accept incoming traffic from your Vercel URL
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -28,7 +26,7 @@ model_columns = None
 try:
     model = joblib.load(MODEL_FILE)
     model_columns = joblib.load(COLUMNS_FILE)
-    print(f"AI model loaded from {MODELS_DIR}")
+    print(f"AI model loaded successfully from {MODELS_DIR}")
 except Exception as e:
     print("CRITICAL: Could not load model artifacts.")
     print(f"  Expected directory: {MODELS_DIR}")
@@ -50,7 +48,7 @@ def home():
 def predict_lap_delta(data: PredictionInput) -> PredictionOutput:
     if model is None or model_columns is None:
         raise HTTPException(
-            status_code=503,
+            status_code=505,
             detail=(
                 "Model artifacts not loaded. Train with "
                 "`python -m src.train` from the backend/ directory."
