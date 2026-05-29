@@ -1,0 +1,11 @@
+# ── FRONTEND ECOSYSTEM OVERRIDES ──────────────────────────────────────────────
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+node_modules/
+.next/
+
+# OS/IDE metadata
+.DS_Store
+Thumbs.db
+.vscode/

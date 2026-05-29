@@ -1,0 +1,1 @@
+export default ({ ["styles"] : ({ ["global"] : ({ [":root"] : ({  }), ["body"] : ({ ["body"] : ({ ["margin"] : "0", ["padding"] : "0", ["background"] : "#010408" }) }) }) }) })

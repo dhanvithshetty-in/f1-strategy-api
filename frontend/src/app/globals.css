@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Professional F1 car theme */
+  --pit-bg: #05070a;
+  --pit-surface: rgba(9, 13, 19, 0.32);
+  --pit-surface-soft: rgba(18, 24, 34, 0.42);
+  --pit-card: rgba(13, 18, 27, 0.48);
+  --pit-card-inner: rgba(22, 29, 41, 0.44);
+  --pit-border: rgba(255, 255, 255, 0.18);
+  --pit-border-strong: rgba(255, 255, 255, 0.34);
+  --pit-text: #f8fafc;
+  --pit-text-secondary: #cbd5e1;
+  --pit-text-muted: #94a3b8;
+  --pit-text-dim: #64748b;
+  --pit-accent-cyan: #38bdf8;
+  --pit-accent-red: #dc2626;
+  --pit-accent-f1: #e10600;
+  --pit-accent-mint: #22c55e;
+  --pit-accent-amber: #f59e0b;
+  --pit-shadow-sm: 0 10px 28px rgba(0, 0, 0, 0.16);
+  --pit-shadow: 0 20px 50px rgba(0, 0, 0, 0.22), 0 8px 24px rgba(0, 0, 0, 0.14);
+  --pit-shadow-lg: 0 34px 80px rgba(0, 0, 0, 0.24);
+  --pit-glow-cyan: rgba(56, 189, 248, 0.28);
+  --pit-glow-red: rgba(225, 6, 0, 0.34);
+  --slider-track: rgba(255, 255, 255, 0.13);
+}
+
+html, body {
+  background: var(--pit-bg);
+  color: var(--pit-text);
+  min-height: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Sliders */
+.pitwall-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  background: linear-gradient(
+    to right,
+    var(--slider-accent, var(--pit-accent-cyan)) 0%,
+    var(--slider-accent, var(--pit-accent-cyan)) var(--slider-pct, 0%),
+    var(--slider-track, rgba(15, 23, 42, 0.1)) var(--slider-pct, 0%),
+    var(--slider-track, rgba(15, 23, 42, 0.1)) 100%
+  );
+  transition: background 0.05s linear;
+}
+
+.pit-shell {
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+}
+
+.pit-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(100deg, rgba(225, 6, 0, 0.10), transparent 18%),
+    linear-gradient(180deg, rgba(255,255,255,0.035), transparent 24%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 12px);
+}
+
+.pit-shell h1,
+.pit-shell p,
+.pit-shell span {
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.42);
+}
+
+.compound-card:hover {
+  transform: translateY(-2px);
+}
+
+.race-strip {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 12px 28px rgba(0,0,0,0.16);
+}
+
+.tire-badge {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at center, rgba(8,12,18,0.96) 0 42%, transparent 43%),
+    conic-gradient(from 0deg, var(--compound-color), color-mix(in srgb, var(--compound-color) 62%, #000), var(--compound-color));
+  border: 1px solid color-mix(in srgb, var(--compound-color) 60%, rgba(255,255,255,0.18));
+}
+
+.tire-badge span {
+  position: relative;
+  z-index: 1;
+}
+
+.tire-badge::before {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px dashed rgba(255,255,255,0.24);
+}
+
+.graph-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 24px 20px;
+}
+
+.risk-band {
+  background: linear-gradient(90deg, #22c55e 0%, #f59e0b 55%, #dc2626 100%);
+}
+
+.pitwall-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f8fafc;
+  border: 3px solid var(--slider-accent, var(--pit-accent-cyan));
+  box-shadow: 0 2px 8px var(--pit-glow-cyan), 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: grab;
+  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pitwall-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f8fafc;
+  border: 3px solid var(--slider-accent, var(--pit-accent-cyan));
+  box-shadow: 0 2px 8px var(--pit-glow-cyan);
+  cursor: grab;
+}
+
+.pitwall-slider:active::-webkit-slider-thumb,
+.pitwall-slider:focus::-webkit-slider-thumb {
+  transform: scale(1.2);
+  cursor: grabbing;
+}
+
+.dot-matrix {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-8px); opacity: 0; }
+  10% { opacity: 0.35; }
+  90% { opacity: 0.35; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+.scan-line {
+  animation: scan 4s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(0.92); }
+}
+
+.pulse-dot {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeup {
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+
+.delta-glow {
+  text-shadow: 0 2px 24px currentColor, 0 0 40px color-mix(in srgb, currentColor 40%, transparent);
+  transition: color 0.35s ease, text-shadow 0.35s ease;
+}
+
+.section-badge {
+  color: #fff;
+  border: 1px solid rgba(225, 6, 0, 0.45);
+  background: rgba(225, 6, 0, 0.22);
+}
+
+@media (max-width: 640px) {
+  .pit-shell {
+    border-radius: 8px;
+    clip-path: none;
+  }
+}
